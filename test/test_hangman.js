@@ -10,7 +10,9 @@ var vumigo = require("vumigo_v01");
 describe('Hangman', function () {
 
     var tester;
-    var fixtures = [];
+    var fixtures = [
+        'test/fixtures/get_random_word.json'
+    ];
 
     beforeEach(function () {
       tester = new vumigo.test_utils.ImTester(app.api, {
@@ -26,7 +28,12 @@ describe('Hangman', function () {
       });
     });
 
-    it.skip('should test something', function (done) {
-
+    it('should present a new game', function (done) {
+        tester.check_state({
+            user: null,
+            content: null,
+            next_state: 'start',
+            response: /New game!\nWord: __________\nLetters guessed so far: \n\(0 to quit\):/
+        }).then(done, done);
     });
 });
