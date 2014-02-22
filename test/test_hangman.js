@@ -35,6 +35,28 @@ describe('Hangman', function () {
           }).then(done, done);
         });
 
+        it('should accept a successful letter', function (done) {
+          tester.check_state({
+            user: {
+              current_state: 'new_game'
+            },
+            content: 'r',
+            next_state: 'resume_game',
+            response: /Word contains at least one 'r'! :D\nWord: r_______r_/
+          }).then(done, done);
+        });
+
+        it('should ignore case', function (done) {
+          tester.check_state({
+            user: {
+              current_state: 'new_game'
+            },
+            content: 'O',
+            next_state: 'resume_game',
+            response: /Word contains at least one 'o'! :D\nWord: ____o__o__/
+          }).then(done, done);
+        });
+
         // something is fundamentally broken here
         it.skip('should quit when given 0 as input', function (done) {
           tester.check_state({
